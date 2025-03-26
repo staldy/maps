@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heatmap GPX.info</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/leaflet"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100vh;"></div>
+    <script>
+        var map = L.map('map').setView([46.8, 6.6], 10); // Centré sur la Suisse
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Ajouter ton GeoJSON hébergé sur GitHub Pages
+        fetch('https://github.com/staldy/maps/blob/main/map.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, { color: 'red' }).addTo(map);
+            });
+    </script>
+</body>
+</html>
